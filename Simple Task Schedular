@@ -29,7 +29,7 @@ int main() {
     string tn;
     int p, e;
 
-    cout << "How many tasks do you want to add? "<<endl;
+    cout << "How many tasks do you want to add? " << endl;
     cin >> n;
 
     for (int i = 0; i < n; i++) {
@@ -39,43 +39,28 @@ int main() {
         cin >> p;
         cout << "Enter execution time (in seconds): ";
         cin >> e;
-      }
 
+        // Create a new task node
         Node* temp = new Node(tn, p, e);
 
+        // Insert into the priority list
         if (head == NULL || head->priority < temp->priority) {
             temp->next = head;
             head = temp;
-        }
+        } 
         else {
             Node* prev = head;
             Node* current = head->next;
-           
-           if(current == NULL)
-           {
-head-> next = temp;  
-}
-           
-           else
-           {
-  while (current != NULL && current->priority >= temp->priority) {
+
+            while (current != NULL && current->priority >= temp->priority) {
                 prev = current;
                 current = current->next;
             }
-  if(current == NULL && current->priority > temp->priority){
- 
-current->next = temp;
-}
-else
-{
-prev->next = temp;
-temp->next = current;
-}
- }
-            }
-           
-       
 
+            prev->next = temp;
+            temp->next = current;
+        }
+    }
 
     // Display the priority list
     cout << "\n-------------------------------------------\n";
