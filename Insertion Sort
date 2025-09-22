@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+
+    cout << "\n\nEnter number of cards: ";
+    cin >> n;
+
+    int card[n];
+    for (int i = 0; i < n; i++) {
+        cout << "Enter card " << i + 1 << ": ";
+        cin >> card[i];
+    }
+
+    // Insertion Sort
+    for (int p = 1; p < n; p++) {               // start from index 1
+        int temp = card[p];
+        int j = p - 1;
+
+        // Shift larger elements to the right
+        while (j >= 0 && temp < card[j]) {
+            card[j + 1] = card[j];
+            j--;
+        }
+        card[j + 1] = temp;
+
+        // Display current state after inserting card p+1
+        cout << "\nAfter inserting card " << p + 1 << ": ";
+        for (int k = 0; k <= p; k++) {
+            cout << card[k] << "\t";
+        }
+    }
+
+    // Final sorted hand
+    cout << "\n\nSorted cards are: ";
+    for (int i = 0; i < n; i++) {
+        cout << card[i] << "\t";
+    }
+    cout << "\n";
+
+    return 0;
+}
