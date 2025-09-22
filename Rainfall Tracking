@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+void displayTable(string cities[], double rainfallData[3][4]) {
+    cout << "City\t\t Month 1\tMonth 2\tMonth 3\tMonth 4\tAverage" << endl;
+   
+    for (int i = 0; i < 3; i++) {
+        double totalRainfall = 0;
+        cout << cities[i] << "\t";
+        for (int j = 0; j < 4; j++) {
+            cout << rainfallData[i][j] << "\t\t";
+            totalRainfall += rainfallData[i][j];
+        }
+        double averageRainfall = totalRainfall / 4;
+        cout << averageRainfall << endl;
+    }
+}
+
+int main() {
+    
+    string cities[3] = {"Pune", "Satara", "Sangli"};
+    
+    double rainfallData[3][4] = {
+        {100, 120, 130, 110},  // City A
+        {80, 95, 110, 100},    // City B
+        {200, 220, 180, 210}   // City C
+    };
+
+    displayTable(cities, rainfallData);
+
+    return 0;
+}
+
+
+
