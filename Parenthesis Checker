@@ -1,0 +1,106 @@
+#include<iostream>
+using namespace std;
+
+class ParenthesisChecker
+{
+    static const int MAX = 100;
+    char stackArr[MAX];
+    int top;
+
+public:
+    ParenthesisChecker()
+    {
+        top = -1;
+    }
+
+    int isEmpty()
+    {
+        return (top == -1);
+    }
+
+    int isFull()
+    {
+        return (top == MAX - 1);
+    }
+
+    void push(char ch)
+    {
+        if (isFull())
+        {
+            cout << "Stack is full! Cannot push " << ch << endl;
+        }
+        else
+        {
+            top++;
+            stackArr[top] = ch;
+        }
+    }
+
+    char pop()
+    {
+        if (isEmpty())
+        {
+            return '\0';
+        }
+        else
+        {
+            char ch = stackArr[top];
+            top--;
+            return ch;
+        }
+    }
+};
+
+int checkBalanced(string exp)
+{
+    ParenthesisChecker s;
+    char ch, popped;
+
+    for (int i = 0; i < exp.length(); i++)
+    {
+        ch = exp[i];
+
+        if (ch == '(' || ch == '{' || ch == '[')
+        {
+            s.push(ch);
+        }
+        else if (ch == ')' || ch == '}' || ch == ']')
+        {
+            popped = s.pop();
+
+            if ((ch == ')' && popped != '(') ||
+                (ch == '}' && popped != '{') ||
+                (ch == ']' && popped != '['))
+            {
+                return 0;
+            }
+        }
+    }
+
+    if (s.isEmpty())
+        return 1;
+    else
+        return 0;
+}
+
+int main()
+{
+    string expression;
+    char choice = 'Y';
+
+    do {
+        cout << "\nEnter an expression: ";
+        cin >> expression;
+
+        if (checkBalanced(expression))
+            cout << "Parentheses are balanced!" << endl;
+        else
+            cout << "Prentheses are NOT balanced!" << endl;
+
+        cout << "Do you want to check another expression? (Y/N): ";
+        cin >> choice;
+
+    } while (choice == 'Y' || choice == 'y');
+
+    return 0;
+}
